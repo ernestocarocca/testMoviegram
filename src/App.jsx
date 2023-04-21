@@ -7,7 +7,11 @@ function App() {
   const [movie, setMovie] = useState([]);
   const [movie2, setMovie2] = useState([]);
   const [movie3, setMovie3] = useState([]);
+  const [movieName, setMovieName] = useState("");
 
+  const handleMovieNameChange = (event) => {
+    setMovieName(event.target.value);
+  };
   const FetchMovies = () => {
     fetch(
       " https://api.themoviedb.org/3/movie/popular?api_key=9bf8866aec070a01073c600a88bbefb5&language=en-US&page=1"
@@ -30,7 +34,7 @@ function App() {
         setMovie2(data.images.backdrops);
         console.log("visar bild 12", movie2);
       });
-    const movieName = "star+wars";
+
     const apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=9bf8866aec070a01073c600a88bbefb5&query=${encodeURIComponent(
       movieName
     )}`;
@@ -43,18 +47,19 @@ function App() {
         setMovie3(data.results);
         console.log("visar bild 3", movie3);
       });
-
-    // https://api.themoviedb.org/3/search/movie?api_key=9bf8866aec070a01073c600a88bbefb5&query=Jack+Reacher
   };
   useEffect(() => {
     FetchMovies();
-  }, []);
+  }, [movieName]);
 
   return (
     <div className="App">
-      <div>
-        <input type="text" />
-      </div>
+      <input
+        type="text"
+        placeholder="Skriv in en filmtitel"
+        value={movieName}
+        onChange={handleMovieNameChange}
+      />
       {movie3.map((movies) => (
         <div>
           <img
