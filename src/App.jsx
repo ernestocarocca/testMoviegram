@@ -13,28 +13,6 @@ function App() {
     setMovieName(event.target.value);
   };
   const FetchMovies = () => {
-    fetch(
-      " https://api.themoviedb.org/3/movie/popular?api_key=9bf8866aec070a01073c600a88bbefb5&language=en-US&page=1"
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setMovie(data.results);
-        console.log("visar bild 1a", movie);
-      });
-
-    fetch(
-      "https://api.themoviedb.org/3/movie/123?api_key=9bf8866aec070a01073c600a88bbefb5&append_to_response=videos,images"
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setMovie2(data.images.backdrops);
-        console.log("visar bild 12", movie2);
-      });
-
     const apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=9bf8866aec070a01073c600a88bbefb5&query=${encodeURIComponent(
       movieName
     )}`;
